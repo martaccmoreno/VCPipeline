@@ -1,5 +1,11 @@
 import os
 
+"""
+Module which performs operations based on the mapping steps of the pipeline
+Prerequisites:
+* bwa version 0.7.12-r1039
+"""
+
 class Alignment:
     def __init__(self, ref, reads, output):
         """
