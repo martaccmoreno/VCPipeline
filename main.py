@@ -1,5 +1,6 @@
 import argparse
 from Alignment import Alignment
+from misc import *
 
 """
 Script which runs the pipeline modules.
@@ -15,12 +16,14 @@ dic_args = vars(args) # transform the Namespace object into a dictionary where a
 
 # If reference hasn't been fully indexed, index it
 
+
 # check if we have BAM files in reads and map non-BAM files (i.e. FASTQ)
 # Need way to deal with non FASTQ files
-not_bam = [(x, True) if x[len(x)-3:len(x)] != "bam" else (0, False) for x in dic_args['reads']]
-if sum([nb[1] for nb in not_bam]) > 0: # if not all items are .bam
-    align = Alignment(dic_args['reference'], dic_args['reads'], dic_args['output'])
-    #align.map()
+nb = not_bam(dic_args['reads'])
+if sum_not_bam(nb) > 0: # if not all items are .bam
+    for nb_elem in nb:
+        to_map = Alignment(dic_args['reference'], nb_elem[0], dic_args['output'])
+    #to_map.map()
 
 
 
