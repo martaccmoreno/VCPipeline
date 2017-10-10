@@ -7,3 +7,8 @@ def not_bam(reads):
 
 def sum_not_bam(not_bam):
     return sum([nb[1] for nb in not_bam])
+
+def gen_index_filenames(fn):
+    filename_prefix = fn[:len(fn)-3]
+    filenames =  [filename_prefix+suffix for suffix in ['amb', 'ann', 'bwt', 'pac', 'sa']]
+    return filenames
