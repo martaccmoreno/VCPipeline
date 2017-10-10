@@ -37,3 +37,4 @@ class Alignment:
                 os.sytem('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" ' + read + ' > lane.sam')
                 # rather than doing read by read this should truly group reads by lane
                 print("Done")
+
