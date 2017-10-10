@@ -16,16 +16,24 @@ class Alignment:
         self.reads = reads
         self.out = output
 
-    def print_args(self):
+    def print_args(self): # for testing purposes
         print(self.ref, self.reads)
 
-    def align(self):
-        # executa na mesma quer exista index ou nao - fazer algo acerca disto
-        print("Starting...")
+    def index(self):
+        print("Starting indexing...")
         os.system('bwa index '+self.ref)
         print("Done")
 
     def map(self):
-        for read in self.reads:
-            print(read)
-            os.system('ls '+self.out)
+        if len(self.reads) == 1:
+            print("Starting mapping...")
+            os.sytem('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" ' + self.reads[0] + ' > lane.sam')
+            print("Done")
+
+        else:
+            #### REWRITE #####
+            for read in self.reads:
+                print("Starting mapping...")
+                os.sytem('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" ' + read + ' > lane.sam')
+                # rather than doing read by read this should truly group reads by lane
+                print("Done")
