@@ -1,20 +1,24 @@
+"""
+Script which runs the pipeline modules.
+"""
+
 import argparse
 from Alignment import Alignment
 from misc import *
 import os
 
-"""
-Script which runs the pipeline modules.
-"""
+### PARSE ARGUMENTS
 
 parser = argparse.ArgumentParser(description='A basic WES pipeline.')
-parser.add_argument('reference', help="The genome to use as a reference.")
-parser.add_argument('reads', nargs='+', help="The reads to use as input.")
+parser.add_argument('reference', help="The genome to use as a reference.", type=is_fasta)
+parser.add_argument('reads', nargs='+', help="The reads to use as input.", type=is_read)
 parser.add_argument('-o', dest='output', default=".", help='Output directory (default is the current directory)')
 # MAYBE adicionar opção para correr no fundo
 args = parser.parse_args()
 # transform the Namespace object into a dictionary where argument names are keys
 dic_args = vars(args)
+
+### PIPELINE
 
 # If reference hasn't been fully indexed, index it
 index_filenames = gen_index_filenames(dic_args['reference'])
