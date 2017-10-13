@@ -2,6 +2,7 @@
 Module with miscellaneous functions to aid main.py
 """
 import argparse
+import Alignment
 
 ### CHECK FILE TYPES
 
@@ -20,6 +21,16 @@ def is_read(string):
             return string
         msg = 'One or more reads cannot be used as input. They must be FASTQ or BAM files.'
         raise argparse.ArgumentTypeError(msg)
+
+### OTHER CHECKS
+
+def check_index_files(list_dir, index_filenames):
+    'Check if all index-related files are available (True), if not runs the index command (False).'
+    for file in index_filenames:
+        if file not in list_dir:
+            return False
+    return True
+
 
 ### OTHERS
 

@@ -22,11 +22,10 @@ dic_args = vars(args)
 # If reference hasn't been fully indexed, index it
 index_filenames = gen_index_filenames(dic_args['reference'])
 list_dir = os.listdir(dic_args['output'])
-for file in index_filenames:
-    if file not in list_dir:
-        align = Alignment(dic_args['reference'], dic_args['reads'], dic_args['output'])
-        align.index()
-        break # eeeeh deve haver maneira melhor de fazer isto
+if check_index_files(list_dir, index_filenames) == False:
+    align = Alignment(dic_args['reference'], dic_args['reads'], dic_args['output'])
+    align.index()
+
 
 # check if we have BAM files in reads and map non-BAM files (i.e. FASTQ)
 # Need way to deal with non FASTQ files -- probably forbid them right away
