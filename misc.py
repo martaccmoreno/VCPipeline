@@ -15,11 +15,12 @@ def is_fasta(string):
 
 def is_read(string):
     'Check if reads have an eligible file ending.'
+    string = string.strip()
     for file_type in ['.bam', '.fastq', '.fastq.gz']:
         if file_type == string[len(string)-len(file_type):len(string)]:
             return string
-        msg = 'One or more reads cannot be used as input. They must be FASTQ or BAM files.'
-        raise argparse.ArgumentTypeError(msg)
+    msg = 'One or more reads cannot be used as input. They must be FASTQ or BAM files.'
+    raise argparse.ArgumentTypeError(msg)
 
 ### OTHER CHECKS
 
