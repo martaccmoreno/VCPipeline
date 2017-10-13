@@ -2,7 +2,6 @@
 Module with miscellaneous functions to aid main.py
 """
 import argparse
-import Alignment
 
 ### CHECK FILE TYPES
 

@@ -27,7 +27,7 @@ if check_index_files(list_dir, index_filenames) == False:
     align.index()
 
 
-# check if we have BAM files in reads and map non-BAM files (i.e. FASTQ)
+# Check if we have BAM files in reads and map non-BAM files (i.e. FASTQ)
 # Need way to deal with non FASTQ files -- probably forbid them right away
 nb = not_bam(dic_args['reads'])
 if sum_not_bam(nb) > 0: # if not all items are .bam
