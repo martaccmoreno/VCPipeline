@@ -27,14 +27,15 @@ class Alignment:
     def map(self):
         if len(self.reads) == 1:
             print("Starting mapping...")
-            os.sytem('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" {}/lane.sam'.format(self.reads[0], self.output))
+            os.system('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" {} {} > {}/lane.sam'
+                      .format(self.ref, self.reads[0], self.out))
             print("Done")
 
         else:
-            #### REWRITE #####
+            #### REWRITE FOR THIS CASE #####
             for read in self.reads:
                 print("Starting mapping...")
-                os.sytem('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" ' + read + ' > lane.sam')
-                # rather than doing read by read this should truly group reads by lane
+                os.system('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" {} {} > {}/lane.sam'
+                          .format(self.ref, ' '.join(self.reads), self.out))
                 print("Done")
 

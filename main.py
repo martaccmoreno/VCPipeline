@@ -34,9 +34,7 @@ if sum_not_bam(nb) > 0: # if not all items are .bam
     for nb_elem in nb:
         to_map = Alignment(dic_args['reference'], nb_elem[0], dic_args['output'])
         #to_map.map()
-        #dic_args['reads'].replace(non-bam for bam equivalent)
-
-    # after being converted into BAM these reads need to join the rest of the pipeline
+        dic_args['reads'] = [read.replace('.sam','.bam') for read in dic_args['reads']]
 
 # next: fixmate and sort
 # We have two instances of Alignment at times... way to only have one instance?
