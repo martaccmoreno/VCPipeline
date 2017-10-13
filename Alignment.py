@@ -27,7 +27,7 @@ class Alignment:
     def map(self):
         if len(self.reads) == 1:
             print("Starting mapping...")
-            os.sytem('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" ' + self.reads[0] + ' > lane.sam')
+            os.sytem('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" {}/lane.sam'.format(self.reads[0], self.output))
             print("Done")
 
         else:

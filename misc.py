@@ -6,19 +6,19 @@ import argparse
 ### CHECK FILE TYPES
 
 def is_fasta(string):
-    "Check if the reference has a legal file ending for FASTA format files."
-    for file_type in [".fna", ".fast", ".fa"]:
+    'Check if the reference has a legal file ending for FASTA format files.'
+    for file_type in ['.fna', '.fast', '.fa']:
         if file_type == string[len(string)-len(file_type):len(string)]:
             return string
-        msg = "Reference is not a FASTA file"
+        msg = 'Reference is not a FASTA file'
         raise argparse.ArgumentTypeError(msg)
 
 def is_read(string):
-    "Check if reads have an eligible file ending."
-    for file_type in [".bam", ".fastq", ".fastq.gz"]:
+    'Check if reads have an eligible file ending.'
+    for file_type in ['.bam', '.fastq', '.fastq.gz']:
         if file_type == string[len(string)-len(file_type):len(string)]:
             return string
-        msg = "One or more reads cannot be used as input. They must be FASTQ or BAM files."
+        msg = 'One or more reads cannot be used as input. They must be FASTQ or BAM files.'
         raise argparse.ArgumentTypeError(msg)
 
 ### OTHERS

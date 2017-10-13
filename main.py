@@ -2,7 +2,6 @@
 Script which runs the pipeline modules.
 """
 
-import argparse
 from Alignment import Alignment
 from misc import *
 import os
@@ -10,8 +9,8 @@ import os
 ### PARSE ARGUMENTS
 
 parser = argparse.ArgumentParser(description='A basic WES pipeline.')
-parser.add_argument('reference', help="The genome to use as a reference.", type=is_fasta)
-parser.add_argument('reads', nargs='+', help="The reads to use as input.", type=is_read)
+parser.add_argument('reference', help='The genome to use as a reference.', type=is_fasta)
+parser.add_argument('reads', nargs='+', help='The reads to use as input.', type=is_read)
 parser.add_argument('-o', dest='output', default=".", help='Output directory (default is the current directory)')
 # MAYBE adicionar opção para correr no fundo
 args = parser.parse_args()
