@@ -6,7 +6,7 @@ import argparse
 ### CHECK FILE TYPES
 
 def is_fasta(string):
-    'Check if the reference has a legal file ending for FASTA format files.'
+    """Check if the reference has a legal file ending for FASTA format files."""
     for file_type in ['.fna', '.fast', '.fa']:
         if file_type == string[len(string)-len(file_type):len(string)]:
             return string
@@ -14,7 +14,7 @@ def is_fasta(string):
         raise argparse.ArgumentTypeError(msg)
 
 def is_read(string):
-    'Check if reads have an eligible file ending.'
+    """Check if reads have an eligible file ending."""
     string = string.strip()
     for file_type in ['.bam', '.fastq', '.fastq.gz']:
         if file_type == string[len(string)-len(file_type):len(string)]:
@@ -25,7 +25,7 @@ def is_read(string):
 ### OTHER CHECKS
 
 def check_index_files(list_dir, index_filenames):
-    'Check if all index-related files are available (True), if not runs the index command (False).'
+    """Check if all index-related files are available (True), if not runs the index command (False)."""
     for file in index_filenames:
         if file not in list_dir:
             return False

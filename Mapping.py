@@ -1,7 +1,8 @@
-"""
+""""
 Module which performs operations based on the mapping steps of the pipeline
 Prerequisites:
 * bwa version 0.7.12-r1039
+* samtools version 1.6
 """
 
 import os
@@ -21,19 +22,29 @@ class Mapping:
         print(self.ref, self.reads)
 
     def index(self):
-        print("Starting indexing...")
+        print('Starting indexing...')
         os.system('bwa index ' + self.ref)
-        print("Done")
+        print('Done')
 
     def map(self):
         if len(self.reads) == 1:
-            print("Starting mapping...")
+            print('Starting mapping...')
             os.system('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" {} {} > {}/lane.sam'
                       .format(self.ref, self.reads[0], self.out))
-            print("Done")
+            print('Done')
 
         else:
-            print("Starting mapping...")
+            print('Starting mapping...')
             os.system('bwa mem -R "@RG\tID:foo\tSM:bar\tLB:library1" {} {} > {}/lane.sam'
                       .format(self.ref, ' '.join(self.reads), self.out))
-            print("Done")
+            print('Done')
+
+    def fixmate(self):
+        print('Cleaning up read pairing information and flags...')
+        os.system('samtools fixmate -O bam {0}/lane.sam {0}/lane_fixmate.bam'.format(self.out))
+        print('Done')
+
+    def sort(self):
+        print('Sorting using coordinate order...')
+        os.system('samtools sort -O bam -o {0}/lane_sorted.bam -T {0}/tmp/lane_temp {0}/lane_fixmate.sam'.format(self.out))
+        print('Done')
