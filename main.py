@@ -34,15 +34,16 @@ nb = not_bam(dic_args['reads'])
 if sum_not_bam(nb) > 0: # if not all items are .bam
     for nb_elem in nb:
         map.map()
-        dic_args['reads'] = [read.replace('.sam','.bam') for read in dic_args['reads']]
+        dic_args['reads'] = 'lane.sam'
         map = Mapping(dic_args['reference'], dic_args['reads'], dic_args['output'])
-
-# Fixmate
-map.fixmate()
+        # Fixmate -- only if file is SAM
+        map.fixmate()
 
 # Sorting
 map.sort()
 
+# Obtain a dictionary of the names of the files created in previous steps
+created_files = map.created_files()
 
 
 

@@ -57,3 +57,5 @@ class Mapping:
     def return_created_files(self):
         """Returns the names of the files (as a dictionary) thus far created by the class."""
         return self.created_files
+
+# Potential problem: what if we use a method more than once?
